@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name lipo-psu-rescue)(type Legacy)(uri ${KIPRJMOD}/lipo-psu-rescue.lib)(options "")(descr ""))
+)
