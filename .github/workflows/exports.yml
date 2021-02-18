@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: lipo-psu
+
+on: [push]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: nerdyscout/kicad-exports@v2.2
+      with:
+      # Required - kibot config file
+        config: docs.kibot.yaml
+      # optional - prefix to output defined in config
+        dir: docs
+      # optional - schematic file
+        schema: '*.sch'
+      # optional - PCB design file
+        board: '*.kicad_pcb'
+    - name: upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: docs
+        path: docs
+  gerbers:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: nerdyscout/kicad-exports@v2.2
+      with:
+      # Required - kibot config file
+        config: gerbers.kibot.yaml
+      # optional - prefix to output defined in config
+        schema: '*.sch'
+      # optional - PCB design file
+        board: '*.kicad_pcb'
+    - name: upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: gerbers
+        path: gerbers
